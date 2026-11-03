@@ -1,0 +1,14 @@
+# ISO/IEC 42001:2023 Annex A control objectives.
+# References may name an objective ("A.6") or a specific control ("A.6.2.4");
+# controls roll up to their objective. Consult the licensed standard for control text.
+name: ISO/IEC 42001:2023 Annex A
+objectives:
+  A.2: Policies related to AI
+  A.3: Internal organization
+  A.4: Resources for AI systems
+  A.5: Assessing impacts of AI systems
+  A.6: AI system life cycle
+  A.7: Data for AI systems
+  A.8: Information for interested parties of AI systems
+  A.9: Use of AI systems
+  A.10: Third-party and customer relationships

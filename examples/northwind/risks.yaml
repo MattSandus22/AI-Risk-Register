@@ -1,0 +1,189 @@
+# Likelihood and impact are 1-5. Residual ratings default to inherent if omitted.
+risks:
+  - id: AIR-001
+    system: SYS-001
+    title: Indirect prompt injection exposes another customer's order data
+    category: secure_resilient
+    owner: Head of Application Security
+    description: >
+      Instructions hidden in retrieved content or user input cause the assistant
+      to reveal order details that belong to a different customer.
+    likelihood: 4
+    impact: 5
+    residual_likelihood: 2
+    residual_impact: 5
+    treatment: mitigate
+    treatments:
+      - description: Retrieval is scoped to the authenticated customer at the API layer, so the model never receives other customers' records
+        status: implemented
+        nist_ai_rmf: [MANAGE 1, MEASURE 2.7]
+        iso_42001: [A.6, A.7]
+      - description: Quarterly adversarial red-team exercise covering direct and indirect injection paths
+        status: in_progress
+        due: 2026-12-15
+        nist_ai_rmf: [MEASURE 1, MEASURE 3]
+        iso_42001: [A.6]
+    last_reviewed: 2026-10-15
+
+  - id: AIR-002
+    system: SYS-001
+    title: Assistant states an incorrect refund or warranty policy
+    category: valid_reliable
+    owner: Director of Customer Experience
+    description: The model invents policy terms, creating commitments the company did not make.
+    likelihood: 4
+    impact: 3
+    residual_likelihood: 2
+    residual_impact: 3
+    treatment: mitigate
+    treatments:
+      - description: Answers must cite a retrieved policy article; the assistant declines when no source is found
+        status: implemented
+        nist_ai_rmf: [MEASURE 2]
+        iso_42001: [A.6]
+      - description: Weekly evaluation of 200 sampled conversations against policy ground truth, with accuracy tracked over time
+        status: implemented
+        nist_ai_rmf: [MEASURE 1, MEASURE 3]
+        iso_42001: [A.6]
+    last_reviewed: 2026-09-20
+
+  - id: AIR-003
+    system: SYS-001
+    title: Customer personal data sent to the LLM vendor is retained or used for training
+    category: privacy_enhanced
+    owner: Data Protection Officer
+    likelihood: 3
+    impact: 4
+    residual_likelihood: 2
+    residual_impact: 4
+    treatment: mitigate
+    treatments:
+      - description: Enterprise agreement with zero data retention and no-training terms; reviewed by Legal
+        status: implemented
+        nist_ai_rmf: [GOVERN 6, MANAGE 3]
+        iso_42001: [A.10]
+      - description: Redact payment and contact details from prompts before they leave our network
+        status: planned
+        due: 2026-12-15
+        nist_ai_rmf: [MANAGE 2]
+        iso_42001: [A.7]
+    last_reviewed: 2026-08-01
+
+  - id: AIR-004
+    system: SYS-001
+    title: Customers are not told they are talking to an AI
+    category: accountable_transparent
+    owner: Director of Customer Experience
+    likelihood: 2
+    impact: 3
+    residual_likelihood: 1
+    residual_impact: 3
+    treatment: mitigate
+    treatments:
+      - description: AI disclosure shown at the start of every chat, with a one-click option to reach a human
+        status: implemented
+        nist_ai_rmf: [MANAGE 2]
+        iso_42001: [A.8]
+    last_reviewed: 2026-06-10
+
+  - id: AIR-005
+    system: SYS-002
+    title: Rankings disadvantage applicants through proxies for protected characteristics
+    category: fair_bias_managed
+    owner: VP People
+    description: >
+      Features such as employment gaps or school names act as proxies for sex,
+      age or disability, producing disparate impact in shortlists.
+    likelihood: 4
+    impact: 5
+    residual_likelihood: 3
+    residual_impact: 5
+    treatment: mitigate
+    treatments:
+      - description: Pre-deployment adverse-impact analysis (four-fifths rule) across sex and age groups on historical applications
+        status: implemented
+        nist_ai_rmf: [MEASURE 2.11, MAP 5]
+        iso_42001: [A.5]
+      - description: A recruiter must review every ranking; the model cannot auto-reject applicants
+        status: implemented
+        nist_ai_rmf: [MANAGE 1, MANAGE 2]
+        iso_42001: [A.9]
+      - description: Independent third-party bias audit before production go-live
+        status: in_progress
+        due: 2027-01-31
+        nist_ai_rmf: [MEASURE 2, MEASURE 4]
+        iso_42001: [A.5]
+    last_reviewed: 2026-10-01
+
+  - id: AIR-006
+    system: SYS-002
+    title: Applicants cannot get a meaningful explanation of how the ranking affected them
+    category: explainable_interpretable
+    owner: VP People
+    likelihood: 4
+    impact: 3
+    treatment: accept
+    acceptance:
+      approver: Chief People Officer
+      date: 2026-07-01
+      expires: 2027-01-01
+      rationale: >
+        The vendor model is not interpretable. Compensating control is mandatory
+        recruiter review (AIR-005). Legal to confirm explanation obligations before
+        go-live; revisit at vendor contract renewal.
+    last_reviewed: 2026-07-01
+
+  - id: AIR-007
+    system: SYS-002
+    title: Vendor changes or retrains the model without notice, invalidating the bias analysis
+    category: valid_reliable
+    owner: Procurement Lead
+    likelihood: 3
+    impact: 4
+    treatment: mitigate
+    treatments:
+      - description: Contract clause requiring 30 days' notice of model changes and our right to re-validate before rollout
+        status: planned
+        due: 2026-10-31
+        nist_ai_rmf: [GOVERN 6, MANAGE 3]
+        iso_42001: [A.10.3]
+    last_reviewed: 2026-10-01
+
+  - id: AIR-008
+    system: SYS-003
+    title: Assistant suggests insecure code that reaches production
+    category: secure_resilient
+    owner: Head of Application Security
+    likelihood: 4
+    impact: 4
+    residual_likelihood: 2
+    residual_impact: 4
+    treatment: mitigate
+    treatments:
+      - description: Static analysis in CI blocks merges with high-severity findings
+        status: implemented
+        nist_ai_rmf: [MANAGE 2]
+        iso_42001: [A.6]
+      - description: Branch protection requires human review of every pull request
+        status: implemented
+        nist_ai_rmf: [MANAGE 1]
+        iso_42001: [A.9]
+    last_reviewed: 2026-09-15
+
+  - id: AIR-009
+    system: SYS-003
+    title: Developers paste secrets or customer data into prompts
+    category: privacy_enhanced
+    owner: VP Engineering
+    likelihood: 3
+    impact: 4
+    residual_likelihood: 2
+    residual_impact: 4
+    treatment: mitigate
+    treatments:
+      - description: Move to the enterprise tier (prompts excluded from training) and enable secret scanning in the IDE plugin
+        status: planned
+        due: 2027-01-15
+        nist_ai_rmf: [GOVERN 6, MANAGE 2]
+        iso_42001: [A.7, A.10]
+    last_reviewed: 2026-10-20

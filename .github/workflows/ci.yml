@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
+      # The sample register is pinned to a date so its findings stay stable.
+      # For a real register, drop --as-of and add --strict so overdue reviews fail the build.
+      - name: Validate sample register
+        run: airisk validate examples/northwind --as-of 2026-11-03
+      - name: Build dashboard
+        run: airisk report examples/northwind --as-of 2026-11-03 -o dashboard.html
+      - uses: actions/upload-artifact@v4
+        if: matrix.python-version == '3.13'
+        with:
+          name: risk-dashboard
+          path: dashboard.html

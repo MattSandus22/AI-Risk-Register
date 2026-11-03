@@ -1,0 +1,36 @@
+# AI system inventory. Every system in production should have assessed risks.
+systems:
+  - id: SYS-001
+    name: Customer Support Assistant
+    owner: Director of Customer Experience
+    description: >
+      Customer-facing chat assistant on the website. Answers order, refund and
+      warranty questions using retrieval over help-center articles and the
+      signed-in customer's order history.
+    lifecycle_stage: production
+    model_source: Third-party LLM via vendor API
+    data_categories: [customer contact details, order history]
+    eu_ai_act_tier: limited
+    human_oversight: Escalation to a human agent on request or low confidence; daily transcript sampling
+
+  - id: SYS-002
+    name: Candidate Screening Model
+    owner: VP People
+    description: >
+      Vendor-hosted model that ranks job applicants for store-manager roles
+      against the job description. Recruiters see a ranked shortlist.
+    lifecycle_stage: validation
+    model_source: Vendor-hosted proprietary model
+    data_categories: [applicant CVs, application answers]
+    eu_ai_act_tier: high
+    human_oversight: A recruiter reviews every ranking; the model cannot reject a candidate
+
+  - id: SYS-003
+    name: Engineering Code Assistant
+    owner: VP Engineering
+    description: AI coding assistant in developer IDEs for the e-commerce platform team.
+    lifecycle_stage: production
+    model_source: Third-party SaaS
+    data_categories: [source code]
+    eu_ai_act_tier: minimal
+    human_oversight: All changes go through pull-request review

@@ -1,0 +1,19 @@
+# Risk methodology for this register. See docs/methodology.md.
+organization: Northwind Retail (fictional)
+
+# Residual scores above this need treatment, or a documented acceptance.
+risk_appetite: 9
+
+# Score = likelihood (1-5) x impact (1-5). Each band covers scores up to "max".
+bands:
+  - { label: Low, max: 4 }
+  - { label: Medium, max: 9 }
+  - { label: High, max: 15 }
+  - { label: Critical, max: 25 }
+
+# How often a risk must be re-reviewed, by residual rating.
+review_days:
+  Low: 365
+  Medium: 180
+  High: 90
+  Critical: 30

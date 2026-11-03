@@ -1,0 +1,24 @@
+# NIST AI Risk Management Framework 1.0 (NIST AI 100-1), Core categories.
+# Short titles are paraphrased; see the framework for full text.
+# References may name a category ("MEASURE 2") or a subcategory ("MEASURE 2.7").
+name: NIST AI RMF 1.0
+categories:
+  GOVERN 1: AI risk policies, processes and procedures are in place
+  GOVERN 2: Accountability structures, roles and training
+  GOVERN 3: Workforce diversity, equity, inclusion and accessibility in AI risk decisions
+  GOVERN 4: Culture that considers and communicates AI risk
+  GOVERN 5: Engagement with relevant AI actors
+  GOVERN 6: Third-party software, data and supply chain risk
+  MAP 1: Context is established and understood
+  MAP 2: The AI system is categorized
+  MAP 3: Capabilities, intended use, benefits and costs are understood
+  MAP 4: Risks and benefits are mapped for all components, including third-party
+  MAP 5: Impacts on individuals, groups, communities, organizations and society are characterized
+  MEASURE 1: Appropriate methods and metrics are identified and applied
+  MEASURE 2: The system is evaluated for trustworthy characteristics
+  MEASURE 3: Identified risks are tracked over time
+  MEASURE 4: Feedback on measurement efficacy is gathered and assessed
+  MANAGE 1: Risks are prioritized, responded to and managed
+  MANAGE 2: Strategies maximize benefits and minimize negative impacts
+  MANAGE 3: Third-party AI risks and benefits are managed
+  MANAGE 4: Treatments, response, recovery and communication are documented and monitored

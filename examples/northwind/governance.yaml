@@ -1,0 +1,36 @@
+# Organization-level controls that apply across all AI systems.
+governance:
+  - id: GOV-001
+    description: AI acceptable-use and governance policy approved by the executive team
+    owner: Chief Risk Officer
+    status: implemented
+    nist_ai_rmf: [GOVERN 1]
+    iso_42001: [A.2]
+
+  - id: GOV-002
+    description: AI Risk Committee with a named accountable executive; meets monthly
+    owner: Chief Risk Officer
+    status: implemented
+    nist_ai_rmf: [GOVERN 2]
+    iso_42001: [A.3]
+
+  - id: GOV-003
+    description: AI system inventory (this register) maintained and reviewed quarterly
+    owner: AI Governance Lead
+    status: implemented
+    nist_ai_rmf: [MAP 1, MAP 2]
+    iso_42001: [A.4]
+
+  - id: GOV-004
+    description: AI impact assessment required before any system enters production
+    owner: AI Governance Lead
+    status: implemented
+    nist_ai_rmf: [MAP 3, MAP 5]
+    iso_42001: [A.5]
+
+  - id: GOV-005
+    description: AI risk awareness training for engineering, product and HR staff
+    owner: AI Governance Lead
+    status: planned
+    due: 2027-02-01
+    nist_ai_rmf: [GOVERN 4]

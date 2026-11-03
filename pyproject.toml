@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-risk-register"
+version = "0.1.0"
+description = "An AI risk register as code: validate, score and report AI system risks mapped to NIST AI RMF and ISO/IEC 42001."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Matt Sandus" }]
+requires-python = ">=3.10"
+dependencies = ["PyYAML>=6.0"]
+keywords = ["ai-governance", "risk-register", "nist-ai-rmf", "iso-42001", "eu-ai-act", "grc"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+airisk = "airisk.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+airisk = ["data/*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
